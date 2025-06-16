@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Form
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
-from transformers import BertTokenizer, BertModel
+from transformers import AutoTokenizer, AutoModel
 from sklearn.metrics.pairwise import cosine_similarity
 import torch
 import numpy as np
@@ -13,8 +13,10 @@ import os
 app = FastAPI()
 
 # Inicializa solo una vez el modelo
-tokenizer = BertTokenizer.from_pretrained('bert-base-multilingual-cased')
-model = BertModel.from_pretrained('bert-base-multilingual-cased')
+
+tokenizer = AutoTokenizer.from_pretrained('distilbert-base-multilingual-cased')
+model = AutoModel.from_pretrained('distilbert-base-multilingual-cased')
+
 
 # ------------------- Embedding y Similarity --------------------
 class TextRequest(BaseModel):
